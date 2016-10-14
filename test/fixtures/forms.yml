@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  environment: MyString
+  location: MyString
+  purpose: MyString
+  name: MyString
+  accessibility: MyString
+  description: MyText
+
+two:
+  environment: MyString
+  location: MyString
+  purpose: MyString
+  name: MyString
+  accessibility: MyString
+  description: MyText
