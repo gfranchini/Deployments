@@ -41,7 +41,24 @@
     <%= f.text_area :description %>
   </div>
 
+  <!-- section for servers -->
+  <%= f.fields_for :servers, Server.new do |server| %>
+      <%= server.label :hostname, "Host Name" %>
+      <%= server.text_field :hostname %>
+      <%= server.label :ip, "IP" %>
+      <%= server.text_field :ip %>
+      <%= server.label :os, "Operating System" %>
+      <%= server.text_field :os %>
+      <%= server.label :cpucores, "CPU Cores" %>
+      <%= server.text_field :cpucores %>
+      <%= server.label :memory, "Memory" %>
+      <%= server.text_field :memory %>
+      <%= server.label :disk, "Disk" %>
+      <%= server.text_field :disk %>
+  <% end %>
+
   <div class="actions">
     <%= f.submit %>
   </div>
+
 <% end %>
