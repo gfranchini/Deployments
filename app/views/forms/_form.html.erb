@@ -42,7 +42,7 @@
   </div>
 
   <!-- section for servers -->
-  <table class="table table-bordered">
+  <table id="server-table" class="table table-bordered">
   <tr>
     <th class="row-description">Host Name</th>
     <th class="row-description">IP Address</th>
@@ -52,14 +52,19 @@
     <th class="row-description">Disk Space(GB)</th>
   </tr>
 
-  <%= f.fields_for :servers, Server.new do |server| %>
-    <td><%= server.text_field :hostname, class: "form-control" %></td>
-    <td><%= server.text_field :ip, class: "form-control" %></td>
-    <td><%= server.select :os, options_for_select(["Ubuntu", "CentOS"]) %></div>
-    <td><%= server.number_field :cpucores, class: "form-control" %></td>
-    <td><%= server.number_field :memory, class: "form-control" %></td>
-    <td><%= server.number_field :disk, class: "form-control" %></td>
-  <% end %>
+  <div id="server-row">
+    <%= f.fields_for(:servers, Server.new) do |server| %>
+      <td><%= server.text_field :hostname, class: "form-control" %></td>
+      <td><%= server.text_field :ip, class: "form-control" %></td>
+      <td><%= server.select :os, options_for_select(["Ubuntu", "CentOS"]) %></div>
+      <td><%= server.number_field :cpucores, class: "form-control" %></td>
+      <td><%= server.number_field :memory, class: "form-control" %></td>
+      <td><%= server.number_field :disk, class: "form-control" %></td>
+      <td><button type="button" id="add-server">Add Another Server!</button></td>
+    <% end %>
+  </div>
+
+
   </table>
 
   <div class="actions">
