@@ -73,10 +73,9 @@
 
   <script>
     $(document).ready(function(){
-        var count = 0;
+        var count = 1;
         $("#add-server").click(function(){
-            count++;
-            $("#server-table").append('\
+          $("#server-table").append('\
             <tr> \
               <td><input class="form-control" type="text" name="form[servers_attributes][' + count + '][hostname]" id="form_servers_attributes_' + count + '_hostname"></td> \
               <td><input class="form-control" type="text" name="form[servers_attributes][' + count + '][ip]" id="form_servers_attributes_' + count + '_ip"></td> \
@@ -85,9 +84,9 @@
               <td><input class="form-control" type="number" name="form[servers_attributes][' + count + '][memory]" id="form_servers_attributes_' + count + '_memory"></td> \
               <td><input class="form-control" type="number" name="form[servers_attributes][' + count + '][disk]" id="form_servers_attributes_' + count + '_disk"></td> \
             </tr > \
-            ');
+          ');
+          count++;
         });
-        console.log(count);
     });
   </script>
 
