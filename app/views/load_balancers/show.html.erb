@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @load_balancer.lb_type %>
+</p>
+
+<p>
+  <strong>Ip address:</strong>
+  <%= @load_balancer.ip_address%>
+</p>
+
+<p>
+  <strong>Server type:</strong>
+  <%= @load_balancer.server_type %>
+</p>
+
+<p>
+  <strong>Form:</strong>
+  <%= @load_balancer.form %>
+</p>
+
+<%= link_to 'Edit', edit_load_balancer_path(@load_balancer) %> |
+<%= link_to 'Back', load_balancers_path %>

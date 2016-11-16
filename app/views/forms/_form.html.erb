@@ -42,6 +42,7 @@
   </div>
 
   <!-- section for servers -->
+<div>
   <table id="server-table" class="table table-bordered">
     <tr>
       <th class="row-description">Host Name</th>
@@ -66,6 +67,28 @@
   </div>
   </table>
   <td><button type="button" id="add-server" class="pull-right">Add Another Server!</button></td>
+</div>
+<div>
+  <!-- section for load balancers -->
+  <table id="load-balancer-table" class="table table-bordered">
+  <tr>
+    <th class="row-description">Type</th>
+    <th class="row-description">IP Address</th>
+    <th class="row-description">HTTP or APP</th>
+  </tr>
+
+  <div id="load-balancer-row" class="table table-boredered">
+    <tr>
+    <%= f.fields_for(:load_balancers, LoadBalancer.new, remote: true) do |balancer| %>
+      <td><%= balancer.select :lb_type, options_for_select(["Kemp", "HA Proxy", "Zen"]) %></td>
+      <td><%= balancer.text_field :ip_address, class: "form-control" %></td>
+      <td><%= balancer.text_field :server_type, class: "form-control" %></td>
+    <% end %>
+    </tr>
+  </table>
+  <td><button type="button" id="add-load-balancer" class="pull-right">Add Load Balancer</button></td>
+</div>
+
 
   <div class="actions">
     <%= f.submit %>
@@ -83,6 +106,20 @@
               <td><input class="form-control" type="number" name="form[servers_attributes][' + count + '][cpucores]" id="form_servers_attributes_' + count + '_cpucores"></td> \
               <td><input class="form-control" type="number" name="form[servers_attributes][' + count + '][memory]" id="form_servers_attributes_' + count + '_memory"></td> \
               <td><input class="form-control" type="number" name="form[servers_attributes][' + count + '][disk]" id="form_servers_attributes_' + count + '_disk"></td> \
+            </tr > \
+          ');
+          count++;
+        });
+    });
+
+    $(document).ready(function(){
+        var count = 1;
+        $("#add-load-balancer").click(function(){
+          $("#load-balancer-table").append('\
+            <tr> \
+              <td><select name="form[load_balancers_attributes][' + count + '][lb_type]" id="form_load_balancers_attributes_' + count + '_lb_type"><option value="Kemp">Kemp</option><option value="HA Proxy">HA Proxy</option><option value="Zen">Zen</option></select></td> \
+              <td><input class="form-control" type="text" name="form[load_balancers_attributes][' + count + '][ip_address]" id="form_load_balancers_attributes' + count + '_ip_address"></td> \
+              <td><input class="form-control" type="text" name="form[load_balancers_attributes][' + count + '][server_type]" id="form_load_balancers_attributes_' + count + '_server_type"></td> \
             </tr > \
           ');
           count++;

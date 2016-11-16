@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161014202914) do
+ActiveRecord::Schema.define(version: 20161116220335) do
 
   create_table "forms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "environment"
@@ -21,6 +21,16 @@ ActiveRecord::Schema.define(version: 20161014202914) do
     t.text     "description",   limit: 65535
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+  end
+
+  create_table "load_balancers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "lb_type"
+    t.string   "ip_address"
+    t.string   "server_type"
+    t.integer  "form_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["form_id"], name: "index_load_balancers_on_form_id", using: :btree
   end
 
   create_table "servers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -36,5 +46,6 @@ ActiveRecord::Schema.define(version: 20161014202914) do
     t.index ["form_id"], name: "index_servers_on_form_id", using: :btree
   end
 
+  add_foreign_key "load_balancers", "forms"
   add_foreign_key "servers", "forms"
 end

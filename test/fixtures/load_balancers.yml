@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: 
+  ip_addres: MyString
+  server_type: MyString
+  form: one
+
+two:
+  type: 
+  ip_addres: MyString
+  server_type: MyString
+  form: two
