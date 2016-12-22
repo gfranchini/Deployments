@@ -1,3 +1,4 @@
+
 <%= form_for(form) do |f| %>
   <% if form.errors.any? %>
     <div id="error_explanation">
@@ -10,18 +11,26 @@
       </ul>
     </div>
   <% end %>
-
+<div class="jumbotron">
+  <h1>Server Build Book</h1>
+  <h6><strong>Purpose:</strong> The Server Build Book documentation is intended to provide Operations with an accurate account of all configurations modifications to get the server to its production state including any configuration modifications made as a result of vulnerability assessments and other security hardening efforts. Related relevant information pertaining to applications and databases hosted on these environments can be found in the companion Application Build Book.</h6>
+</div>
+<h3>General Info</h3>
 <table class="table table-bordered">
   <tbody>
     <tr>
       <th scope="row" class="row-description">Server Environment</th>
       <td>
+        <%= f.label(:environment, 'Test') %>
+        <%= f.radio_button(:environment, 'test') %>
         <%= f.label(:environment, 'Development') %>
         <%= f.radio_button(:environment, 'development') %>
         <%= f.label(:environment, 'Test') %>
         <%= f.radio_button(:environment, 'test') %>
         <%= f.label(:environment, 'QA') %>
         <%= f.radio_button(:environment, 'qa') %>
+        <%= f.label(:environment, 'Staging') %>
+        <%= f.radio_button(:environment, 'staging') %>
         <%= f.label(:environment, 'Production') %>
         <%= f.radio_button(:environment, 'production') %>
       </td>
@@ -62,6 +71,7 @@
 </table>
 
   <!-- section for servers -->
+<h3>Server Info</h3>
 <div>
   <table id="server-table" class="table table-bordered">
     <tr>
@@ -90,6 +100,7 @@
 </div>
 <div>
   <!-- section for load balancers -->
+  <h3>Load Balancer Info</h3>
   <table id="load-balancer-table" class="table table-bordered">
   <tr>
     <th class="row-description">Type</th>
