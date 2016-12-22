@@ -11,35 +11,55 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :environment %>
-    <%= f.text_field :environment %>
-  </div>
+<table class="table table-bordered">
+  <tbody>
+    <tr>
+      <th scope="row" class="row-description">Server Environment</th>
+      <td>
+        <%= f.label(:environment, 'Development') %>
+        <%= f.radio_button(:environment, 'development') %>
+        <%= f.label(:environment, 'Test') %>
+        <%= f.radio_button(:environment, 'test') %>
+        <%= f.label(:environment, 'QA') %>
+        <%= f.radio_button(:environment, 'qa') %>
+        <%= f.label(:environment, 'Production') %>
+        <%= f.radio_button(:environment, 'production') %>
+      </td>
+    </tr>
 
-  <div class="field">
-    <%= f.label :location %>
-    <%= f.text_field :location %>
-  </div>
+    <tr>
+      <th scope="row" class="row-description">Server Location</th>
+      <td><%= f.text_field(:location, class: "form-control") %></td>
+    </tr>
 
-  <div class="field">
-    <%= f.label :purpose %>
-    <%= f.text_field :purpose %>
-  </div>
+    <tr>
+      <th scope="row" class="row-description">Server Purpose</th>
+      <td><%= f.text_area(:purpose, class: "form-control") %></td>
+    </tr>
 
-  <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </div>
+    <tr>
+      <th scope="row" class="row-description">Application Name </th>
+      <td><%= f.text_field(:name, class: "form-control") %></td>
+    </tr>
 
-  <div class="field">
-    <%= f.label :accessibility %>
-    <%= f.text_field :accessibility %>
-  </div>
+    <tr>
+      <th scope="row" class="row-description">Server Accessibility</th>
+      <td>
+        <%= f.label :accessibility,'Internal' %>
+        <%= f.radio_button(:accessibility,'internal') %>
+        <%= f.label :accessibility,'External' %>
+        <%= f.radio_button(:accessibility,'external') %>
+        <%= f.label :accessibility,'Both' %>
+        <%= f.radio_button(:accessibility,'both') %>
+      </td>
+    </tr>
 
-  <div class="field">
-    <%= f.label :description %>
-    <%= f.text_area :description %>
-  </div>
+    <tr>
+      <th scope="row" class="row-description">Application Description</th>
+      <td><%= f.text_area(:description, class: "form-control") %></td>
+    </tr>
+  </tbody>
+</table>
 
   <!-- section for servers -->
 <div>
@@ -58,7 +78,7 @@
     <%= f.fields_for(:servers, Server.new, remote: true) do |server| %>
       <td><%= server.text_field :hostname, class: "form-control" %></td>
       <td><%= server.text_field :ip, class: "form-control" %></td>
-      <td><%= server.select :os, options_for_select(["Ubuntu", "CentOS"]) %></div>
+      <td><%= server.select :os, options_for_select(["Ubuntu", "CentOS"], {class: "form-control"}) %></div>
       <td><%= server.number_field :cpucores, class: "form-control" %></td>
       <td><%= server.number_field :memory, class: "form-control" %></td>
       <td><%= server.number_field :disk, class: "form-control" %></td>
@@ -94,19 +114,23 @@
     <%= f.submit %>
   </div>
 
+
+<!-- JavaScript -->
   <script>
     $(document).ready(function(){
         var count = 1;
         $("#add-server").click(function(){
           $("#server-table").append('\
-            <tr> \
-              <td><input class="form-control" type="text" name="form[servers_attributes][' + count + '][hostname]" id="form_servers_attributes_' + count + '_hostname"></td> \
-              <td><input class="form-control" type="text" name="form[servers_attributes][' + count + '][ip]" id="form_servers_attributes_' + count + '_ip"></td> \
-              <td><select name="form[servers_attributes][' + count + '][os]" id="form_servers_attributes_' + count + '_os"><option value="Ubuntu">Ubuntu</option><option value="CentOS">CentOS</option></select></td> \
-              <td><input class="form-control" type="number" name="form[servers_attributes][' + count + '][cpucores]" id="form_servers_attributes_' + count + '_cpucores"></td> \
-              <td><input class="form-control" type="number" name="form[servers_attributes][' + count + '][memory]" id="form_servers_attributes_' + count + '_memory"></td> \
-              <td><input class="form-control" type="number" name="form[servers_attributes][' + count + '][disk]" id="form_servers_attributes_' + count + '_disk"></td> \
-            </tr > \
+            <tbody> \
+              <tr> \
+                <td><input class="form-control" type="text" name="form[servers_attributes][' + count + '][hostname]" id="form_servers_attributes_' + count + '_hostname"></td> \
+                <td><input class="form-control" type="text" name="form[servers_attributes][' + count + '][ip]" id="form_servers_attributes_' + count + '_ip"></td> \
+                <td><select name="form[servers_attributes][' + count + '][os]" id="form_servers_attributes_' + count + '_os"><option value="Ubuntu">Ubuntu</option><option value="CentOS">CentOS</option></select></td> \
+                <td><input class="form-control" type="number" name="form[servers_attributes][' + count + '][cpucores]" id="form_servers_attributes_' + count + '_cpucores"></td> \
+                <td><input class="form-control" type="number" name="form[servers_attributes][' + count + '][memory]" id="form_servers_attributes_' + count + '_memory"></td> \
+                <td><input class="form-control" type="number" name="form[servers_attributes][' + count + '][disk]" id="form_servers_attributes_' + count + '_disk"></td> \
+              </tr > \
+            </tbody> \
           ');
           count++;
         });
@@ -116,11 +140,13 @@
         var count = 1;
         $("#add-load-balancer").click(function(){
           $("#load-balancer-table").append('\
-            <tr> \
-              <td><select name="form[load_balancers_attributes][' + count + '][lb_type]" id="form_load_balancers_attributes_' + count + '_lb_type"><option value="Kemp">Kemp</option><option value="HA Proxy">HA Proxy</option><option value="Zen">Zen</option></select></td> \
-              <td><input class="form-control" type="text" name="form[load_balancers_attributes][' + count + '][ip_address]" id="form_load_balancers_attributes' + count + '_ip_address"></td> \
-              <td><input class="form-control" type="text" name="form[load_balancers_attributes][' + count + '][server_type]" id="form_load_balancers_attributes_' + count + '_server_type"></td> \
-            </tr > \
+            <tbody> \
+              <tr> \
+                <td><select name="form[load_balancers_attributes][' + count + '][lb_type]" id="form_load_balancers_attributes_' + count + '_lb_type"><option value="Kemp">Kemp</option><option value="HA Proxy">HA Proxy</option><option value="Zen">Zen</option></select></td> \
+                <td><input class="form-control" type="text" name="form[load_balancers_attributes][' + count + '][ip_address]" id="form_load_balancers_attributes' + count + '_ip_address"></td> \
+                <td><input class="form-control" type="text" name="form[load_balancers_attributes][' + count + '][server_type]" id="form_load_balancers_attributes_' + count + '_server_type"></td> \
+              </tr > \
+            </tbody> \
           ');
           count++;
         });
