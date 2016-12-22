@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Repo:</strong>
+  <%= @deployment.repo %>
+</p>
+
+<p>
+  <strong>Stack:</strong>
+  <%= @deployment.stack %>
+</p>
+
+<p>
+  <strong>Software:</strong>
+  <%= @deployment.software %>
+</p>
+
+<p>
+  <strong>Installation:</strong>
+  <%= @deployment.installation %>
+</p>
+
+<p>
+  <strong>Form:</strong>
+  <%= @deployment.form %>
+</p>
+
+<%= link_to 'Edit', edit_deployment_path(@deployment) %> |
+<%= link_to 'Back', deployments_path %>

@@ -120,6 +120,29 @@
   <td><button type="button" id="add-load-balancer" class="pull-right">Add Load Balancer</button></td>
 </div>
 
+<!-- deployment information -->
+<h3>Deployment Information</h3>
+<table id="deployment-table" class="table table-bordered">
+    <%= f.fields_for(:deployments, Deployment.new, remote: true) do |deployment| %>
+    <tr>
+      <th scope="row" class="row-description">GitHub Repo URL</th>
+      <td><%= deployment.text_field(:repo, class: "form-control") %></td>
+    </tr>
+    <tr>
+      <th scope="row" class="row-description">Application Stack</th>
+      <td><%= deployment.text_field(:stack, class: "form-control") %></td>
+    </tr>
+    <tr>
+      <th scope="row" class="row-description">Additional Software</th>
+      <td><%= deployment.text_area(:software, class: "form-control") %></td>
+    </tr>
+    <tr>
+      <th scope="row" class="row-description">Deployment Instructions</th>
+      <td><%= deployment.text_area(:installation, class: "form-control") %></td>
+    </tr>
+    <% end %>
+</table>
+
 
   <div class="actions">
     <%= f.submit %>
