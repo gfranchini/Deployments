@@ -69,6 +69,10 @@ class FormsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def form_params
-      params.require(:form).permit(:environment, :location, :purpose, :name, :accessibility, :description, servers_attributes: [:hostname, :ip, :os, :cpucores, :memory, :disk], load_balancers_attributes: [:lb_type, :ip_address, :server_type], deployments_attributes:[:repo, :stack, :software, :installation])
+      params.require(:form).permit(:environment, :location, :purpose, :name, :accessibility, :description,
+      servers_attributes: [:hostname, :ip, :os, :cpucores, :memory, :disk],
+      load_balancers_attributes: [:lb_type, :ip_address, :server_type],
+      deployments_attributes:[:repo, :stack, :software, :installation],
+      architectures_attributes:[:description, :diagram_file_name, :diagram_content_type, :diagram_file_size, :diagram_updated_at])
     end
 end

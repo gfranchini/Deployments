@@ -25,8 +25,8 @@
         <%= f.radio_button(:environment, 'test') %>
         <%= f.label(:environment, 'Development') %>
         <%= f.radio_button(:environment, 'development') %>
-        <%= f.label(:environment, 'Test') %>
-        <%= f.radio_button(:environment, 'test') %>
+        <%= f.label(:environment, 'Training') %>
+        <%= f.radio_button(:environment, 'Training') %>
         <%= f.label(:environment, 'QA') %>
         <%= f.radio_button(:environment, 'qa') %>
         <%= f.label(:environment, 'Staging') %>
@@ -143,6 +143,26 @@
     <% end %>
 </table>
 
+<!-- architecture information -->
+<h3>Architecture Information</h3>
+<table id="architecture-table" class="table table-bordered">
+  <%= f.fields_for(:architectures, Architecture.new, remote: true) do |architecture| %>
+  <tr>
+    <th scope="row" class="row-description">Architecture Description</th>
+    <td><%= architecture.text_area(:description, class: "form-control") %></td>
+  </tr>
+  <tr>
+    <th scope="row" class="row-description">Upload Architecture</th>
+    <td><%= f.file_field(:diagram, class: "btn btn-default btn-file", id: "pictureInput") %></td>
+  <tr>
+  <tr>
+    <td id="target">
+    </td>
+  </tr>
+
+  <% end %>
+</table>
+
 
   <div class="actions">
     <%= f.submit %>
@@ -184,6 +204,22 @@
           ');
           count++;
         });
+    });
+
+    $(document).ready(function() {
+      $('#pictureInput').on('change', function(event) {
+        var files = event.target.files;
+        var image = files[0]
+        var reader = new FileReader();
+        reader.onload = function(file) {
+          var img = new Image();
+          console.log(file);
+          img.src = file.target.result;
+          $('#target').html(img);
+        }
+        reader.readAsDataURL(image);
+        console.log(files);
+      });
     });
   </script>
 
